@@ -38,6 +38,7 @@ class Dictionary{
             if(temp->key==key){
                 cout<<"key already exist"<<endl;
                 temp->value=value;
+                return;
 
             }
             temp=temp->next;

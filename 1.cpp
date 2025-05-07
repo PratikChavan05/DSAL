@@ -8,7 +8,7 @@ class Node {
     friend class Tree;
 
 public:
-    Node(int val=0){
+    Node(int val){
         data=val;
         left=NULL;
         right=NULL;
@@ -167,10 +167,7 @@ public:
         }
     }
 
-    void eraseTree() {
-        erase(root);
-        root = NULL;
-    }
+   
 
     // Menu Functions
     void displayRecursive() {
@@ -240,7 +237,7 @@ int main() {
                 break;
             }
             case 8:
-                tree.eraseTree();
+                tree.erase(tree.getRoot());
                 cout << "Tree Erased!\n";
                 break;
             case 9:

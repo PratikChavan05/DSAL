@@ -1,9 +1,4 @@
-#include <iostream>
-#include <map>
-#include <vector>
-#include <queue>
-#include <stack>
-#include <set>
+#include<bits/stdc++.h>
 using namespace std;
 
 class Graph {
@@ -28,10 +23,10 @@ public:
 
     void showGraph() {
         cout << "\nGraph Representation (Adjacency List):\n";
-        for (auto& pair : adj) {
-            cout << landmarks[pair.first] << " --> ";
-            for (int neighbor : pair.second)
-                cout << landmarks[neighbor] << ", ";
+        for (auto it : adj) {
+            cout << landmarks[it.first] << " --> ";
+            for (auto it2 : it.second)
+                cout << landmarks[it2] << ", ";
             cout << endl;
         }
     }
@@ -58,35 +53,33 @@ public:
         }
         cout << endl;
     }
-
     void DFS(int start) {
-        cout << "\nDFS Traversal from " << landmarks[start] << ":\n";
-        set<int> visited;
+        cout << "\nDFS from " << landmarks[start] << ":\n";
+        vector<bool> visited(adj.size(), false);
         stack<int> st;
-
         st.push(start);
-
+    
         while (!st.empty()) {
             int curr = st.top();
             st.pop();
-
-            if (!visited.count(curr)) {
-                visited.insert(curr);
+    
+            if (!visited[curr]) {
+                visited[curr] = true;
                 cout << landmarks[curr] << " ";
             }
-
-            for (auto it = adj[curr].rbegin(); it != adj[curr].rend(); ++it) {
-                if (!visited.count(*it)) {
-                    st.push(*it);
-                }
+    
+            for (int neighbor : adj[curr]) {
+                if (!visited[neighbor])
+                    st.push(neighbor);
             }
         }
         cout << endl;
     }
+    
 
     void displayLandmarks() {
         cout << "\nAvailable Landmarks:\n";
-        for (auto& pair : landmarks) {
+        for (auto pair : landmarks) {
             cout << pair.first << ": " << pair.second << endl;
         }
     }
@@ -95,12 +88,11 @@ public:
 int main() {
     Graph g;
 
-    // Adding edges between landmarks (you can customize this)
-    g.addEdge(0, 1); // Main Gate <-> Library
-    g.addEdge(1, 2); // Library <-> Canteen
-    g.addEdge(1, 3); // Library <-> Admin Block
-    g.addEdge(2, 4); // Canteen <-> Hostel
-    g.addEdge(3, 5); // Admin Block <-> Playground
+    g.addEdge(0, 1); 
+    g.addEdge(1, 2); 
+    g.addEdge(1, 3); 
+    g.addEdge(2, 4); 
+    g.addEdge(3, 5); 
     g.displayLandmarks();
     g.showGraph();
 

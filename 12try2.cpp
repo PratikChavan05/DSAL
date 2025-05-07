@@ -59,9 +59,8 @@ void deleteRecord(const char* fname){
     cin>>roll;
     fstream file(fname,ios::in|ios::out|ios::binary);
     if(!file){
-        file.open(fname,ios::out|ios::binary);
-        file.close();
-        file.open(fname,ios::in|ios::out|ios::binary);
+        cout<<"not found"<<endl;
+        return;
     }
     int pos = (roll-1)*sizeof(Student);
     file.seekp(pos);
